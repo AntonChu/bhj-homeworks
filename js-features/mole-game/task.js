@@ -1,6 +1,8 @@
-const holes = document.getElementsByClassName('hole')
+const holes = document.getElementsByClassName('hole');
 const success = document.getElementById('dead');
-const fail = document.getElementById('lost')
+const fail = document.getElementById('lost');
+
+
 
 function click(){
     if(this.className.includes('hole_has-mole')){

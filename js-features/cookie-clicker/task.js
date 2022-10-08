@@ -8,7 +8,7 @@ element.onclick = function(){
     element.width = 250;
     clicks.textContent++;
     arr.push(new Date());
-    speed.textContent = ((arr[(arr.length - 1)] - arr[0]) / 1000 / clicks.textContent).toFixed(3);
+    speed.textContent = (1 / ((arr[(arr.length - 1)] - arr[0]) / 1000 / clicks.textContent)).toFixed(3);
     setTimeout(() => {
        element.width = 200; 
     }, 50);
