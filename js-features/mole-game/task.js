@@ -1,12 +1,4 @@
-const hole1 = document.getElementById('hole1');
-const hole2 = document.getElementById('hole2');
-const hole3 = document.getElementById('hole3');
-const hole4 = document.getElementById('hole4');
-const hole5 = document.getElementById('hole5');
-const hole6 = document.getElementById('hole6');
-const hole7 = document.getElementById('hole7');
-const hole8 = document.getElementById('hole8');
-const hole9 = document.getElementById('hole9');
+const holes = document.getElementsByClassName('hole')
 const success = document.getElementById('dead');
 const fail = document.getElementById('lost')
 
@@ -19,14 +11,17 @@ function click(){
 
     if(+success.textContent === 10){
         alert('Победа');
-        location.reload();
+        success.textContent = 0;
+        fail.textContent = 0;
     }else if(+fail.textContent === 5){
         alert('Поражение');
-        location.reload();
+        success.textContent = 0;
+        fail.textContent = 0;
     }
 }
 
-hole1.onclick = click;
+// holes.onclick = click;
+hole1.onclick = click
 hole2.onclick = click;
 hole3.onclick = click;
 hole4.onclick = click;
