@@ -8,6 +8,9 @@ class Game {
     this.reset();
 
     this.registerEvents();
+
+    this.text = document.querySelector('body');
+    this.text.addEventListener('keydown', this.registerEvents)
   }
 
   reset() {
@@ -16,7 +19,23 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
-  registerEvents() {
+  registerEvents(press) {
+    const letters = document.getElementsByClassName('symbol');
+    const lettersArr = Array.from(letters);
+
+    let count = 0;
+    console.log(press);
+
+    while(count < lettersArr.length){
+      if(press.key.toLowerCase() !== lettersArr[count].toLowerCase()){
+        this.fail();
+      }else{
+        count++;
+      }
+    }
+
+    this.success();
+   
     /*
       TODO:
       Написать обработчик события, который откликается
