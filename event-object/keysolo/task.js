@@ -9,8 +9,6 @@ class Game {
 
     this.registerEvents();
 
-    this.text = document.querySelector('body');
-    this.text.addEventListener('keydown', this.registerEvents)
   }
 
   reset() {
@@ -19,22 +17,31 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
-  registerEvents(press) {
-    const letters = document.getElementsByClassName('symbol');
-    const lettersArr = Array.from(letters);
+  registerEvents() {
+    const action = document.querySelector('body');
 
-    let count = 0;
-    console.log(press);
+    let currentletter = this.currentSymbol.textContent;
 
-    while(count < lettersArr.length){
-      if(press.key.toLowerCase() !== lettersArr[count].toLowerCase()){
-        this.fail();
+    function showSimbol(press){
+      if(press.key.toLowerCase() === currentletter){
+        this.success();
       }else{
-        count++;
+        this.fail();
       }
     }
+    action.addEventListener('keydown', showSimbol);
+  
+    console.log(this.currentSymbol.textContent)
 
-    this.success();
+    // while(count < lettersArr.length){
+    //   if(press.key.toLowerCase() !== lettersArr[count].toLowerCase()){
+    //     this.fail();
+    //   }else{
+    //     count++;
+    //   }
+    // }
+
+    // this.success();
    
     /*
       TODO:
