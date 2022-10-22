@@ -19,37 +19,30 @@ class Game {
 
   registerEvents() {
     const action = document.querySelector('body');
+    const word = document.getElementsByClassName('symbol');
+    const time = document.getElementsByClassName('status__time');
 
-    let currentletter = this.currentSymbol.textContent;
+    time[0].textContent = word.length;
+    let timeId = null;
 
-    function showSimbol(press){
-      if(press.key.toLowerCase() === currentletter){
+    timeId = setInterval(() => {
+      time[0].textContent--;
+      if(+time[0].textContent === 0){
+        this.fail();
+        clearInterval(timeId)
+      }
+    }, 1000);
+
+    action.addEventListener('keydown', press => {
+      let currentletter = this.currentSymbol.textContent;
+      let initialTime = 0;
+
+      if(press.key === currentletter){
         this.success();
       }else{
         this.fail();
       }
-    }
-    action.addEventListener('keydown', showSimbol);
-  
-    console.log(this.currentSymbol.textContent)
-
-    // while(count < lettersArr.length){
-    //   if(press.key.toLowerCase() !== lettersArr[count].toLowerCase()){
-    //     this.fail();
-    //   }else{
-    //     count++;
-    //   }
-    // }
-
-    // this.success();
-   
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+    });
   }
 
   success() {
