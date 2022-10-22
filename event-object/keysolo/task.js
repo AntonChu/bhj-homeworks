@@ -22,20 +22,20 @@ class Game {
     const word = document.getElementsByClassName('symbol');
     const time = document.getElementsByClassName('status__time');
 
-    time[0].textContent = word.length;
     let timeId = null;
-
-    timeId = setInterval(() => {
-      time[0].textContent--;
-      if(+time[0].textContent === 0){
-        this.fail();
-        clearInterval(timeId)
-      }
-    }, 1000);
 
     action.addEventListener('keydown', press => {
       let currentletter = this.currentSymbol.textContent;
       let initialTime = 0;
+      time[0].textContent = word.length;
+
+      timeId = setInterval(() => {
+        time[0].textContent--;
+
+        if(+time[0].textContent === 0){
+          this.fail();
+        }
+      }, 1000);
 
       if(press.key === currentletter){
         this.success();
@@ -56,6 +56,7 @@ class Game {
       alert('Победа!');
       this.reset();
     }
+    clearInterval(timeId);
     this.setNewWord();
   }
 
@@ -64,6 +65,7 @@ class Game {
       alert('Вы проиграли!');
       this.reset();
     }
+    clearInterval(timeId)
     this.setNewWord();
   }
 
