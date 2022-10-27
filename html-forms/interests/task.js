@@ -1,21 +1,31 @@
-const headCheckbox = document.getElementsByClassName('interest__check');
+const headCheckbox = document.getElementsByTagName('input');
+console.log(headCheckbox);
 
 let headCheckboxArr = Array.from(headCheckbox);
+console.log(headCheckboxArr);
 
-let clicked = () => {
+function clicked(){
 
-    console.log(this.className)
-
-    if(this.className === "interest__check"){
-        this.checked = !this.checked;
-        // установить всем детям такую же позицию как у родителя
-        Array.from(this.childNodes).forEach(el => el.checked === this.checked);
-    }else{
-        this.checked = !this.checked;
+    if(this.closest('li').getElementsByTagName('input').length > 1){
+        let checked = this.checked;
+        Array.from(this.closest('li').getElementsByTagName('input')).forEach(el => {
+            el.checked = checked;
+        });
         return;
+    }else{
+        let checked = this.checked;
+        this.checked = checked;
+        if(Array.from(this.closest('ul').getElementsByTagName('input')).every(el => el.checked === checked)){
+            this.parentElement.parentElement.parentElement.parentElement.getElementsByTagName('input')[0].checked = checked;
+            return;
+        }else{
+            this.parentElement.parentElement.parentElement.parentElement.getElementsByTagName('input')[0].checked = false;
+            return;
+        }
     }
 }
 
 headCheckboxArr.forEach(item => {
     item.addEventListener('change', clicked);
 })
+
