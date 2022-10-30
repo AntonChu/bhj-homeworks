@@ -25,23 +25,34 @@ class Game {
     const time = document.getElementsByClassName('status__time');
 
     // time[0].textContent = word.length;
-    this.timeId = null;
+    time[0].textContent = word.length;
+
+    this.timeId = setInterval(() => {
+      time[0].textContent--;
+
+      if(+time[0].textContent === 0){
+        this.fail();
+      }
+    }, 1000);
+
+    console.log(this.timeId);
 
     action.addEventListener('keydown', press => {
-      let currentletter = this.currentSymbol.textContent;
-      time[0].textContent = word.length;
-       
       if(press.shiftKey){
+        console.log('stop');
         return;
       }
 
-      this.timeId = setInterval(() => {
-        time[0].textContent--;
+      let currentletter = this.currentSymbol.textContent;
+      // time[0].textContent = word.length;
 
-        if(+time[0].textContent === 0){
-          this.fail();
-        }
-      }, 1000);
+      // this.timeId = setInterval(() => {
+      //   time[0].textContent--;
+
+      //   if(+time[0].textContent === 0){
+      //     this.fail();
+      //   }
+      // }, 1000);
 
       console.log(this.timeId);
 
@@ -70,13 +81,14 @@ class Game {
   }
 
   fail() {
+    clearInterval(this.timeId);
+
     if (++this.lossElement.textContent === 5) {
       alert('Вы проиграли!');
       this.reset();
     }
-   
+
     this.setNewWord();
-    clearInterval(this.timeId);
   }
 
   setNewWord() {
