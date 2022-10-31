@@ -29,7 +29,6 @@ chat[0].onclick = function(){
                 <div class="message__text">Чего ждем?</div>
             </div>
         `;
-        
         scrollDown();
     }, 10000);
 }
