@@ -16,3 +16,5 @@ let isVisible = () => {
 }
 
 document.addEventListener('scroll', isVisible);
+
+
