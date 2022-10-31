@@ -20,19 +20,36 @@ function getAnswer(){
 
 chat[0].onclick = function(){
     chat[0].className = 'chat-widget chat-widget_active';
-}
 
-inputText.onfocus = function(){
-    timeId = setTimeout(() => {
+    timeId = setInterval(() => {
         let date = new Date().toISOString().substring(11, 16);
         messages[0].innerHTML += `
             <div class="message">
             <div class="message__time">${date}</div>
-                <div class="message__text">Че ждем?</div>
+                <div class="message__text">Чего ждем?</div>
             </div>
         `;
-        clearTimeout(timeId);
+        
+        scrollDown();
     }, 10000);
+}
+
+// inputText.onfocus = function(){
+//     timeId = setInterval(() => {
+//         let date = new Date().toISOString().substring(11, 16);
+//         messages[0].innerHTML += `
+//             <div class="message">
+//             <div class="message__time">${date}</div>
+//                 <div class="message__text">Чего ждем?</div>
+//             </div>
+//         `;
+//         // clearTimeout(timeId);
+//     }, 10000);
+// }
+
+let scrollDown = () => {
+    const lastChild = document.getElementsByClassName('chat-widget__messages')[0];
+    lastChild.scrollIntoView(false);
 }
 
 chat[0].addEventListener('keydown', press => {
@@ -45,7 +62,7 @@ chat[0].addEventListener('keydown', press => {
              </div>
         `;
         inputText.value = '';
-        document.documentElement.scrollTop;
+        scrollDown();
 
         let date2 = new Date().toISOString().substring(11, 16);
         messages[0].innerHTML += `
@@ -54,7 +71,7 @@ chat[0].addEventListener('keydown', press => {
                 <div class="message__text">${getAnswer()}</div>
             </div>
         `;
-        document.documentElement.scrollTop;
+        scrollDown();
     }
 
     clearTimeout(timeId);
