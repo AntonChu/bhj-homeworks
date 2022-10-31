@@ -50,6 +50,7 @@ btnArr.forEach(el => {
             clone.insertAdjacentHTML('afterBegin', `<div class="close">X</div>`);
             el.closest('body').getElementsByClassName('cart')[0].className = 'cart';
             document.getElementsByClassName('cart__products')[0].insertAdjacentHTML('beforeend', clone.outerHTML);
+            // closerFunc();
             let closer = document.getElementsByClassName('close');
             let closerArr = Array.from(closer);
             closerArr.forEach(el => {
