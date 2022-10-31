@@ -31,6 +31,7 @@ class Game {
       time[0].textContent--;
 
       if(+time[0].textContent === 0){
+        clearInterval(this.timeId);
         this.fail();
       }
     }, 1000);
