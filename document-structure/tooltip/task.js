@@ -18,29 +18,21 @@ function clean(){
     }
 }
 
-// let position = () => {
-//     let heigth = document.documentElement.clientHeight;
-//     let {top, left} = this.getBoundingClientRect();
-//     if(top + 100 < heigth){
-//         element.nextElementSibling.style = `left: ${left}px; top: ${top - 10}px`;
-//     }else{
-//         element.nextElementSibling.style = `left: ${left}px; top: ${top + 10}px`;
-//     }
-// }
+function position(element){
+    let heigth = document.documentElement.clientHeight;
+    let {top, left} = element.getBoundingClientRect();
+    if(top + 100 < heigth){
+        element.nextElementSibling.style = `left: ${left}px; top: ${top + 20}px`;
+    }else{
+        element.nextElementSibling.style = `left: ${left}px; top: ${top - 30}px`;
+    }
+}
 
 linksArr.forEach(element => {
     element.onclick = () => {
         clean();
         element.nextElementSibling.classList.add('tooltip_active');
-        // position();
-        let heigth = document.documentElement.clientHeight;
-        let {top, bottom, left} = element.getBoundingClientRect();
-        if(top + 100 < heigth){
-            element.nextElementSibling.style = `left: ${left}px; top: ${top + 20}px`;
-        }else{
-            element.nextElementSibling.style = `left: ${left}px; top: ${top - 30}px`;
-        }
+        position(element);
         return false;
     };
 });
-
