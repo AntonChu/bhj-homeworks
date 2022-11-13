@@ -1,7 +1,7 @@
 const title = document.getElementById('poll__title');
 const answers = document.getElementById('poll__answers');
 
-let xhr = new XMLHttpRequest(); 
+const xhr = new XMLHttpRequest(); 
 xhr.open('GET', 'https://netology-slow-rest.herokuapp.com/poll.php');
 xhr.responseType = 'json'; 
 xhr.send();
@@ -18,7 +18,7 @@ function setTitle(){
 }
 
 function setAnswers(){
-    let arrAnswers = xhr.response.data.answers;
+    const arrAnswers = xhr.response.data.answers;
     
     for(let i = 0; i < arrAnswers.length; i++){
         let button = document.createElement('button');
@@ -40,17 +40,16 @@ function click(){
         request.open('POST', 'https://netology-slow-rest.herokuapp.com/poll.php');
         request.responseType = 'json'; 
         request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        request.send(`vote=1&answer=${index}`);    
+        request.send(`vote=${xhr.response.id}&answer=${index}`);    
      
         request.onreadystatechange = function () {
-            if(request.readyState === 4){
-                console.log(request);
-                let statistic = request.response.stat;
-                let total = statistic.reduce((acc, el) => el.votes + acc, 0);
+            if(request.readyState === 4 && request.status === 200){
+                const statistic = request.response.stat;
+                const total = statistic.reduce((acc, el) => el.votes + acc, 0);
+                answers.innerHTML = '';
                 
                 for(let i = 0; i < statistic.length; i++){
-                    // answers.remove();
-                    let statPoint = document.createElement('div');
+                    const statPoint = document.createElement('div');
                     statPoint.textContent = `${statistic[i].answer}: ${(statistic[i].votes / total * 100).toFixed(3)}%`
                     answers.appendChild(statPoint);
                 }
