@@ -5,7 +5,7 @@ if(localStorage.text){
     editor.value = localStorage.text;
 }
 
-editor.addEventListener('keydown', () => {
+editor.addEventListener('input', () => {
     localStorage.text = editor.value;
 })
 

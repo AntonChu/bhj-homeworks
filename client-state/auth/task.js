@@ -7,6 +7,12 @@ const control = document.getElementsByClassName('control');
 
 let controlArr = Array.from(control);
 
+if(localStorage.id){
+    welcome.className = 'welcome welcome_active';
+    user.textContent = localStorage.id;
+    signin.className = 'signin';
+}
+
 form.addEventListener('submit', (event) => {
     const formData = new FormData(form);
     const request = new XMLHttpRequest();
@@ -15,13 +21,6 @@ form.addEventListener('submit', (event) => {
    
     request.onreadystatechange = function(){
         if(request.readyState === 4 && request.status === 200){
-            if(localStorage.id){
-                welcome.className = 'welcome welcome_active';
-                user.textContent = localStorage.id;
-                signin.className = 'signin';
-                return;
-            }
-
             if(!(JSON.parse(request.response)).success){
                 alert('Неверный логин/пароль');
             }else{

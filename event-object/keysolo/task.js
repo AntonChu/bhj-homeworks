@@ -39,12 +39,8 @@ class Game {
     console.log(this.timeId);
 
     action.addEventListener('keydown', press => {
-      if(press.shiftKey){
-        console.log('stop');
-        return;
-      }
-
-      let currentletter = this.currentSymbol.textContent;
+      if(press.key != 'Shift'){
+        let currentletter = this.currentSymbol.textContent;
       // time[0].textContent = word.length;
 
       // this.timeId = setInterval(() => {
@@ -55,12 +51,13 @@ class Game {
       //   }
       // }, 1000);
 
-      console.log(this.timeId);
+        console.log(this.timeId);
 
-      if(press.key === currentletter){
-        this.success();
-      }else{
-        this.fail();
+        if(press.key === currentletter){
+          this.success();
+        }else{
+          this.fail();
+        } 
       }
     });
   }
